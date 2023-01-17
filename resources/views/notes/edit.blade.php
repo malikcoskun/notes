@@ -15,8 +15,8 @@
                             <input type="text" name="title" id="title" class="form-control" value="{{ $note->title }}">
                         </div>
                         <div class="form-group">
-                            <label for="body">Body</label>
-                            <textarea type="text" name="body" id="body" class="form-control">{{ $note->content }}</textarea>
+                            <label for="content">Body</label>
+                            <textarea type="text" name="content" id="content" class="form-control">{{ $note->content }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-warning">Update</button>
                     </form>

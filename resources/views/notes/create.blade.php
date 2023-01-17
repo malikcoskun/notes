@@ -15,8 +15,8 @@
                             <input type="text" name="title" id="title" class="form-control" placeholder="Enter note title">
                         </div>
                         <div class="form-group">
-                            <label for="body">Body</label>
-                            <textarea type="text" name="body" id="body" class="form-control" placeholder="Enter note body"></textarea>
+                            <label for="content">Body</label>
+                            <textarea type="text" name="content" id="content" class="form-control" placeholder="Enter note body"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>

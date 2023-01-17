@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Activitylog\Models\Activity;
 use App\Models\User;
 use App\Models\Note;
+use App\Http\Requests\NoteUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -30,8 +32,9 @@ class NoteController extends Controller
         $note->user_id = auth()->id();
 
         $note->title = $request->title;
-        $note->content = $request->body;
+        $note->content = $request->content;
 
+        activity()->log('New note added: ' . $note->title);
         $note->save();
 
         return redirect()->route('notes.index');
@@ -42,6 +45,7 @@ class NoteController extends Controller
         $note = Note::find($id);
         $this->authorize('delete', $note);
 
+        activity()->log('Note deleted: ' . $note->title);
         $note->delete();
 
         return redirect()->route('notes.index')->with('success', 'Note has been deleted successfully');
@@ -59,6 +63,7 @@ class NoteController extends Controller
         $note = Note::findOrFail($id);
         $this->authorize('update', $note);
 
+        activity()->log('Note updated: ' . $note->title);
         $note->update($request->all());
 
         return redirect()->route('notes.index')->with('success', 'Note has been updated successfully');
