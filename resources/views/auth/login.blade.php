@@ -11,6 +11,10 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        @if(session('message'))
+                            <div class="alert alert-info">{{ session('message') }}</div>
+                        @endif
+
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
@@ -29,7 +33,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" {{--required--}} autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -53,9 +57,11 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" name="submit" class="btn btn-primary" value="login">
                                     {{ __('Login') }}
                                 </button>
+
+                                or <button type="submit" name="submit" class="btn btn-dark" value="magic-link">Send magic link</button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
